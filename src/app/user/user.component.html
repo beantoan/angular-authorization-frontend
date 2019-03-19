@@ -1,0 +1,63 @@
+<app-page-header>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <button mat-raised-button
+            color="primary"
+            (click)="onAddUserClicked()">
+      {{'user.add_button' | translate}}
+    </button>
+  </div>
+</app-page-header>
+
+<div class="responsive-table">
+  <table mat-table class="mat-table-flex"
+         [dataSource]="usersDataSource">
+
+    <ng-container matColumnDef="name">
+      <th fxFlex="20" mat-header-cell *matHeaderCellDef><h4>{{'user.name' | translate}}</h4></th>
+      <td fxFlex="20" mat-cell *matCellDef="let row">
+        {{row.name}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th fxFlex="15" mat-header-cell *matHeaderCellDef><h4>{{'user.email' | translate}}</h4></th>
+      <td fxFlex="15" mat-cell *matCellDef="let row">{{row.email}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th fxFlex="20" mat-header-cell *matHeaderCellDef><h4>{{'user.role' | translate}}</h4></th>
+      <td fxFlex="20" mat-cell *matCellDef="let row">{{row.role.name}} - {{row.role.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th fxFlex="15" mat-header-cell *matHeaderCellDef><h4>{{'user.status' | translate}}</h4></th>
+      <td fxFlex="15" mat-cell *matCellDef="let row">{{row.status_name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_sign_in_at">
+      <th fxFlex="15" mat-header-cell *matHeaderCellDef><h4>{{'user.last_sign_in_at' | translate}}</h4></th>
+      <td fxFlex="15" mat-cell *matCellDef="let row">{{row.last_sign_in_at | date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th fxFlex="20" mat-header-cell *matHeaderCellDef><h4>{{'user.actions' | translate}}</h4></th>
+      <td fxFlex="20" mat-cell *matCellDef="let row">
+        <button mat-button (click)="onEditUserClicked(row)">
+          {{'user.edit_button' | translate}}
+        </button>
+      </td>
+    </ng-container>
+
+    <tr fxFlexFill mat-header-row
+        *matHeaderRowDef="tableColumns"></tr>
+
+    <tr fxFlexFill mat-row class="mat-not-expended-row"
+        *matRowDef="let row; columns: tableColumns;"></tr>
+  </table>
+</div>
+
+<mat-paginator #usersPaginator
+               [length]="usersTotalElements"
+               [pageSize]="usersPageSize"
+               [showFirstLastButtons]="true">
+</mat-paginator>

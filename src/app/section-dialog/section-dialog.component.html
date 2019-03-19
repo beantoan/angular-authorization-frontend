@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>
+  {{getTitle() | translate:translateParams}}
+</h2>
+
+<mat-dialog-content class="mat-typography">
+  <mat-progress-bar mode="indeterminate" *ngIf="isSubmitting"></mat-progress-bar>
+
+  <form [formGroup]="sectionForm" fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div fxFlexFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+      <mat-form-field fxFlex="30">
+        <input matInput type="text"
+               autocomplete="off" placeholder="{{'section.action_key' | translate}}"
+               formControlName="action_key" required
+               (click)="$event.target.select()"
+               #nameInput="matInput"/>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="40">
+        <mat-select placeholder="{{'section.parent_section' | translate}}"
+                    [disabled]="data && data.parent_id == null && data.children_count > 0"
+                    formControlName="parent_id">
+          <mat-option value="">{{'section.no_parent_option' | translate}}</mat-option>
+
+          <mat-option *ngFor="let item of allSections" [value]="item.id"
+                      [disabled]="data && data.id === item.id">
+            {{item.name}} - {{item.action_key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div fxFlex="20" class="mat-form-field">
+        <div class="mat-form-field-wrapper">
+          <div class="mat-form-field-flex">
+            <div class="mat-form-field-infix">
+              <mat-slide-toggle
+                formControlName="is_display">{{'section.display_section' | translate}}</mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlexFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+      <mat-form-field fxFlex="48">
+        <input matInput
+               type="text"
+               formControlName="name"
+               (click)="$event.target.select()"
+               required
+               autocomplete="off"
+               placeholder="{{'section.name' | translate}}"/>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="48">
+        <input matInput
+               type="text"
+               formControlName="desc"
+               (click)="$event.target.select()"
+               autocomplete="off"
+               placeholder="{{'section.description' | translate}}"/>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-select placeholder="{{'section.relate_to_features' | translate}}" multiple
+                  [disabled]="!sectionForm.get('parent_id').value"
+                  formControlName="child_section_ids" (selectionChange)="onChildSectionsChanged($event)">
+        <mat-select-trigger>
+          <mat-chip-list class="m-0">
+            <mat-chip *ngFor="let sc of selectedChildSections.value"
+                      [disabled]="!sectionForm.get('parent_id').value"
+                      removable
+                      (removed)="removeSelectedChildSection(sc)">
+              {{sc.title_with_parent}}
+              <mat-icon matChipRemove
+                        *ngIf="sectionForm.get('parent_id').value">cancel
+              </mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-select-trigger>
+
+        <mat-optgroup *ngFor="let section of allSections"
+                      [label]="section.name + ' - ' + section.action_key"
+                      [hidden]="section.children_count == 0">
+          <mat-option *ngFor="let child of section.children" [value]="child.id"
+                      [disabled]="data && data.id === child.id">
+            {{child.title_with_parent}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCloseDialogClicked()">{{'dialog.close' | translate}}</button>
+  <button mat-raised-button color="primary"
+          (click)="onSaveSectionClicked()">
+    {{'section.save_button' | translate}}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,47 @@
+<div fxLayout="row" fxLayoutAlign="center center" >
+  <mat-card class="mat-elevation-z8 mat-card-login">
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="mat-form">
+
+        <h2>{{'login.login_title' | translate}}</h2>
+
+        <mat-form-field>
+          <input matInput
+                 formControlName="email" required
+                 placeholder="{{'login.email' | translate}}"/>
+
+          <mat-icon matSuffix>email</mat-icon>
+
+          <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
+            {{'login.email_invalid_error' | translate}}
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+            {{'login.email_blank_error' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password"
+                 formControlName="password" required
+                 placeholder="{{'login.password' | translate}}"/>
+
+          <mat-icon matSuffix>security</mat-icon>
+
+          <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+            {{'login.password_blank_error' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <a mat-button routerLink="">{{'login.register_button' | translate}}</a>
+          <button mat-raised-button color="primary" name="Login" type="submit" class="fl-rght">
+            {{'login.login_button' | translate}}
+          </button>
+        </div>
+
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>

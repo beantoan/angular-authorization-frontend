@@ -1,0 +1,69 @@
+<app-page-header>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <button mat-raised-button
+            color="primary"
+            (click)="onAddRoleClicked()">
+      {{'role.add_button' | translate}}
+    </button>
+  </div>
+</app-page-header>
+
+<div class="responsive-table">
+  <table mat-table multiTemplateDataRows class="mat-table-flex"
+         [dataSource]="rolesDataSource">
+
+    <ng-container matColumnDef="name">
+      <th fxFlex="10" mat-header-cell *matHeaderCellDef><h4>{{'role.name' | translate}}</h4></th>
+      <td fxFlex="10" mat-cell *matCellDef="let row">
+        {{row.name}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th fxFlex="25" mat-header-cell *matHeaderCellDef><h4>{{'role.title' | translate}}</h4></th>
+      <td fxFlex="25" mat-cell *matCellDef="let row">{{row.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="sections">
+      <th fxFlex="40" mat-header-cell *matHeaderCellDef><h4>{{'role.features' | translate}}</h4></th>
+      <td fxFlex="40" mat-cell *matCellDef="let row" class="p-2">
+        <mat-chip-list class="m-0 p-0" [selectable]="false">
+          <mat-chip *ngFor="let sc of row.sections"
+                    [disableRipple]="true" [selectable]="false" [removable]="false">
+            {{sc.title_with_parent}}
+          </mat-chip>
+
+          <mat-chip *ngIf="row.is_admin" color="accent" selected
+                    [disableRipple]="true" [selectable]="false" [removable]="false">
+            {{'role.super_admin' | translate}}
+          </mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th fxFlex="25" mat-header-cell *matHeaderCellDef><h4>{{'role.actions' | translate}}</h4></th>
+      <td fxFlex="25" mat-cell *matCellDef="let row">
+        <button mat-button (click)="onEditRoleClicked(row)">
+          {{'role.edit' | translate}}
+        </button>
+
+        <button mat-button (click)="onDeleteRoleClicked(row)">
+          {{'role.delete' | translate}}
+        </button>
+      </td>
+    </ng-container>
+
+    <tr fxFlexFill mat-header-row
+        *matHeaderRowDef="tableColumns"></tr>
+
+    <tr fxFlexFill mat-row class="mat-not-expended-row"
+        *matRowDef="let row; columns: tableColumns;"></tr>
+  </table>
+</div>
+
+<mat-paginator #rolesPaginator
+               [length]="rolesTotalElements"
+               [pageSize]="rolesPageSize"
+               [showFirstLastButtons]="true">
+</mat-paginator>

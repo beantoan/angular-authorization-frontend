@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+    <div class="page-header" fxLayout="row" fxLayout.lt-sm="column"
+         fxLayoutAlign="space-between center" fxLayoutAlign.lt-sm="start stretch">
+      <div fxLayout="row" fxLayoutAlign="start center" class="page-title" ngClass.lt-sm="mb-3">
+        <mat-icon *ngIf="hasTitle">{{getIcon()}}</mat-icon>
+        <p class="mat-h1" *ngIf="hasTitle">{{getTitle() | translate}}</p>
+      </div>
+
+      <ng-content></ng-content>
+    </div>
+
+    <mat-divider></mat-divider>
+  </mat-card-content>
+</mat-card>

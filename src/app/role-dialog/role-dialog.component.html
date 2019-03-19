@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>
+  {{getTitle() | translate:translateParams}}
+</h2>
+
+<mat-dialog-content class="mat-typography">
+  <mat-progress-bar mode="indeterminate" *ngIf="isSubmitting"></mat-progress-bar>
+
+  <form [formGroup]="roleForm" fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div fxFlexFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+      <mat-form-field fxFlex="20">
+        <input matInput type="text"
+               autocomplete="off" placeholder="{{'role.name' | translate}}"
+               formControlName="name" required
+               (click)="$event.target.select()"
+               #nameInput="matInput"/>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50">
+        <input matInput type="text"
+               autocomplete="off" placeholder="{{'role.title' | translate}}"
+               formControlName="title" required
+               (click)="$event.target.select()"/>
+      </mat-form-field>
+
+      <div fxFlex="20" class="mat-form-field">
+        <div class="mat-form-field-wrapper">
+          <div class="mat-form-field-flex">
+            <div class="mat-form-field-infix">
+              <mat-slide-toggle formControlName="is_admin">{{'role.super_admin' | translate}}</mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <input matInput
+             type="text"
+             formControlName="description"
+             (click)="$event.target.select()"
+             autocomplete="off"
+             placeholder="{{'role.description' | translate}}"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="{{'role.allowed_access_features' | translate}}" multiple
+                  [disabled]="roleForm.get('is_admin').value"
+                  formControlName="section_ids" (selectionChange)="onSectionIdsChanged($event)">
+        <mat-select-trigger>
+          <mat-chip-list class="m-0">
+            <mat-chip *ngFor="let sc of selectedSections"
+                      [disabled]="roleForm.get('is_admin').value"
+                      [removable]="!roleForm.get('is_admin').value"
+                      (removed)="removeSelectedSection(sc)">
+              {{sc.title_with_parent}}
+              <mat-icon matChipRemove *ngIf="!roleForm.get('is_admin').value">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-select-trigger>
+
+        <mat-optgroup *ngFor="let section of allSections"
+                      [label]="section.name + ' - ' + section.action_key">
+          <mat-option *ngFor="let child of section.children" [value]="child.id">
+            {{child.title_with_parent}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCloseDialogClicked()">{{'dialog.close' | translate}}</button>
+  <button mat-raised-button color="primary"
+          (click)="onSaveRoleClicked()">
+    {{'role.save_button' | translate}}
+  </button>
+</mat-dialog-actions>

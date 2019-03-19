@@ -1,0 +1,4 @@
+<div class="aui-message aui-message-{{data.type}}">
+  <p class="title" *ngIf="data.title != null">{{data.title | translate}}</p>
+  <p *ngIf="data.content != null">{{data.content | translate}}</p>
+</div>

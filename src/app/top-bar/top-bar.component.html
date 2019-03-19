@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button *appShowAuthed="true"
+            (click)="navService.toggleNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span>{{title}}</span>
+
+    <div fxShow="true" fxHide.lt-md>
+
+    </div>
+
+    <span class="flex-space"></span>
+
+    <div>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>

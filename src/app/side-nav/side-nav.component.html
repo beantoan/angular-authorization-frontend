@@ -1,0 +1,58 @@
+<app-top-bar class="mat-elevation-z6 fixed-topnav"
+             fxHide.gt-xs [title]="title"></app-top-bar>
+
+<mat-sidenav-container [hasBackdrop]="false" [autosize]="true">
+  <mat-sidenav #appDrawer mode="side" opened disableClose>
+    <mat-nav-list *appShowAuthed="true">
+
+      <div mat-subheader fxLayout="row" fxLayoutAlign="space-between start">
+        <img src="assets/img/logo.png" [style.height]="'20px'"/>
+        <div class="mat-h4 pr-2" *ngIf="navService.expandedState.value">Hi {{currentUser.name}}</div>
+      </div>
+
+      <mat-divider fxShow="true"></mat-divider>
+
+      <app-nested-sidenav-menu *ngFor="let item of navItems" [item]="item"></app-nested-sidenav-menu>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item *appShowAuthed="true" routerLink="/profile"
+         class="menu-list-item">
+        <mat-icon [ngClass]="navService.expandedState.value ? 'route-icon' : ''"
+                  [matTooltip]="navService.expandedState.value ? '' : ('menu.profile' | translate)">account_circle
+        </mat-icon>
+        <span *ngIf="navService.expandedState.value">{{'menu.profile' | translate}}</span>
+      </a>
+
+      <a mat-list-item *appShowAuthed="true" routerLink="."
+         class="menu-list-item"
+         (click)="onLogoutClicked(); appDrawer.toggle()">
+        <mat-icon [ngClass]="navService.expandedState.value ? 'route-icon' : ''"
+                  [matTooltip]="navService.expandedState.value ? '' : ('menu.logout' | translate)">exit_to_app
+        </mat-icon>
+        <span *ngIf="navService.expandedState.value">{{'menu.logout' | translate}}</span>
+      </a>
+
+      <mat-divider></mat-divider>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-top-bar class="mat-elevation-z6"
+                 fxHide.xs [title]="title"></app-top-bar>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading" class="app-progress-bar"></mat-progress-bar>
+
+    <router-outlet></router-outlet>
+
+    <mat-divider></mat-divider>
+
+    <br/>
+
+    <app-footer></app-footer>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+

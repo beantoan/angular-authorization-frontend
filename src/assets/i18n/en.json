@@ -1,0 +1,88 @@
+{
+  "dialog": {
+    "close": "Close"
+  },
+  "login": {
+    "email": "Email",
+    "email_blank_error": "Please enter your email",
+    "email_invalid_error": "Please provide an valid email",
+    "login_button": "Login",
+    "login_title": "Login",
+    "password": "Password",
+    "password_blank_error": "Please enter a password",
+    "register_button": "Register",
+    "username_password_blank_error": "Please enter your email and password"
+  },
+  "menu": {
+    "accounts": "Accounts",
+    "groups": "Groups",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "configurations": "Configurations",
+    "features": "Features"
+  },
+  "message": {
+    "enter_required_information": "Please enter the required information.",
+    "login_error": "Your email and password are incorrect",
+    "login_success": "You have logged in successfully",
+    "logout_success": "You have logged out successfully",
+    "unknown_error": "Unknown error occurs. Please try again.",
+    "user_has_been_logged_out": "You have been logged out. Please login again."
+  },
+  "role": {
+    "actions": "Actions",
+    "add_button": "Add Role",
+    "allowed_access_features": "Allow access these features",
+    "as_a_lessee": "As a lessee",
+    "as_a_lessor": "As a lessor",
+    "delete": "Delete",
+    "description": "Description",
+    "edit": "Edit",
+    "edit_dialog_title": "Edit role \"{{title}}\"",
+    "features": "Features",
+    "load_list_failed": "Could not load the roles. Please try again.",
+    "name": "Name",
+    "new_dialog_title": "Create new role",
+    "permissions": "Permissions",
+    "save_button": "Save Role",
+    "super_admin": "Super Admin",
+    "title": "Title"
+  },
+  "section": {
+    "action_key": "Action key",
+    "actions": "Actions",
+    "add_button": "Add Feature",
+    "add_child_button": "Add Child",
+    "delete_button": "Delete",
+    "description": "Description",
+    "display": "Display",
+    "display_section": "Display section",
+    "edit_button": "Edit",
+    "edit_dialog_title": "Edit feature \"{{title}}\"",
+    "feature": "Feature",
+    "load_list_failed": "Could not load the features. Please try again.",
+    "name": "Name",
+    "new_dialog_title": "Create new feature",
+    "no_parent_option": "(No parent feature)",
+    "parent_section": "Parent feature",
+    "relate_to_features": "Relate to these features",
+    "save_button": "Save Feature"
+  },
+  "user": {
+    "actions": "Actions",
+    "add_button": "Add Account",
+    "edit_button": "Edit",
+    "edit_dialog_title": "Edit account \"{{title}}\"",
+    "email": "Email",
+    "load_list_failed": "Could not load the accounts. Please try again.",
+    "name": "Name",
+    "new_dialog_title": "Create new account",
+    "password": "Password",
+    "password_hint": "Leave password blank if dont want to change",
+    "role": "Group",
+    "save_button": "Save Account",
+    "status": "Status",
+    "last_sign_in_at": "Last sign in at"
+  }
+}

@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>
+  {{getTitle() | translate:translateParams}}
+</h2>
+
+<mat-dialog-content class="mat-typography">
+  <mat-progress-bar mode="indeterminate" *ngIf="isSubmitting"></mat-progress-bar>
+
+  <form [formGroup]="userForm" fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div fxFlexFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+      <mat-form-field fxFlex="30">
+        <input matInput type="text"
+               autocomplete="off" placeholder="{{'user.name' | translate}}"
+               formControlName="name" required
+               (click)="$event.target.select()"
+               #nameInput="matInput"/>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="30">
+        <input matInput
+               type="text"
+               formControlName="email"
+               (click)="$event.target.select()"
+               required
+               autocomplete="off"
+               placeholder="{{'user.email' | translate}}"/>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="30">
+        <input matInput
+               type="text"
+               formControlName="password"
+               (click)="$event.target.select()"
+               [required]="!isEditUser()"
+               autocomplete="off"
+               placeholder="{{'user.password' | translate}}"/>
+        <mat-hint *ngIf="isEditUser()">{{'user.password_hint' | translate}}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div fxFlexFill fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+
+      <mat-form-field fxFlex="30">
+        <mat-select placeholder="{{'user.status' | translate}}"
+                    formControlName="status"
+                    required>
+          <mat-option *ngFor="let item of statuses | async" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="65">
+        <mat-select placeholder="{{'user.role' | translate}}"
+                    formControlName="role_id"
+                    required>
+          <mat-option *ngFor="let item of roles | async" [value]="item.id">
+            {{item.name}} - {{item.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCloseDialogClicked()">{{'dialog.close' | translate}}</button>
+  <button mat-raised-button color="primary"
+          (click)="onSaveUserClicked()">
+    {{'user.save_button' | translate}}
+  </button>
+</mat-dialog-actions>

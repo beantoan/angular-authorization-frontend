@@ -1,0 +1,88 @@
+{
+  "dialog": {
+    "close": "Đóng"
+  },
+  "login": {
+    "email": "Email",
+    "email_blank_error": "Hãy nhập email đăng nhập",
+    "email_invalid_error": "Hãy nhập email hợp lệ",
+    "login_button": "Đăng nhập",
+    "login_title": "Đăng nhập",
+    "password": "Mật khẩu",
+    "password_blank_error": "Hãy nhập mật khẩu",
+    "register_button": "Đăng ký",
+    "username_password_blank_error": "Hãy nhập email đăng nhập và mật khẩu"
+  },
+  "menu": {
+    "accounts": "Tài khoản người dùng",
+    "groups": "Nhóm người dùng",
+    "login": "Đăng nhập",
+    "logout": "Thoát",
+    "profile": "Thông tin cá nhân",
+    "configurations": "Thiết lập hệ thống",
+    "features": "Chức năng hệ thống"
+  },
+  "message": {
+    "enter_required_information": "Hãy nhập những thông tin bắt buộc",
+    "login_error": "Email hoặc mật khẩu của bạn không đúng",
+    "login_success": "Bạn đã đăng nhập thành công",
+    "logout_success": "Bạn đã thoát khỏi hệ thống thành công",
+    "unknown_error": "Có lỗi xảy ra. Vui lòng thử lại.",
+    "user_has_been_logged_out": "Bạn đã bị thoát ra khỏi hệ thống. Hãy đăng nhập lại."
+  },
+  "role": {
+    "actions": "Thao tác",
+    "add_button": "Thêm nhóm người dùng",
+    "allowed_access_features": "Được phép truy cập những chức năng này",
+    "as_a_lessee": "Nhân sự tìm thuê bất động sản",
+    "as_a_lessor": "Nhân sự tìm khách thuê bất động sản",
+    "delete": "Xóa",
+    "description": "Miêu tả",
+    "edit": "Sửa",
+    "edit_dialog_title": "Sửa thông tin nhóm người dùng \"{{title}}\"",
+    "features": "Chức năng",
+    "load_list_failed": "Lỗi khi tải danh sách nhóm người dùng. Hãy vui lòng thử lại.",
+    "name": "Tên",
+    "new_dialog_title": "Thêm nhóm người dùng mới",
+    "permissions": "Quyền truy cập dữ liệu",
+    "save_button": "Lưu nhóm người dùng",
+    "super_admin": "Super Admin",
+    "title": "Tiêu đề"
+  },
+  "section": {
+    "action_key": "Key chức năng",
+    "actions": "Thao tác",
+    "add_button": "Thêm chức năng",
+    "add_child_button": "Thêm chức năng con",
+    "delete_button": "Xóa",
+    "description": "Miêu tả",
+    "display": "Hiển thị",
+    "display_section": "Hiển thị",
+    "edit_button": "Sửa",
+    "edit_dialog_title": "Sửa thông tin chức năng \"{{title}}\"",
+    "feature": "Chức năng",
+    "load_list_failed": "Lỗi khi tải danh sách chức năng. Hãy vui lòng thử lại.",
+    "name": "Tên",
+    "new_dialog_title": "Thêm chức năng mới",
+    "no_parent_option": "(Không có tính năng cha)",
+    "parent_section": "Chức năng cha",
+    "relate_to_features": "Những tính năng liên quan",
+    "save_button": "Lưu chức năng"
+  },
+  "user": {
+    "actions": "Thao tác",
+    "add_button": "Thêm tài khoản",
+    "edit_button": "Sửa",
+    "edit_dialog_title": "Sửa thông tin tài khoản \"{{title}}\"",
+    "email": "Email",
+    "load_list_failed": "Lỗi khi tải danh sách tài khoản. Hãy vui lòng thử lại.",
+    "name": "Tên",
+    "new_dialog_title": "Thêm tài khoản mới",
+    "password": "Mật khẩu",
+    "password_hint": "Để trống mật khẩu nếu không muốn thay đổi",
+    "role": "Nhóm người dùng",
+    "save_button": "Lưu tài khoản",
+    "status": "Trạng thái",
+    "last_sign_in_at": "Đăng nhập lần cuối lúc"
+  }
+}

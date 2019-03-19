@@ -1,0 +1,125 @@
+<app-page-header>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <button mat-raised-button
+            color="primary"
+            (click)="onAddSectionClicked()">
+      {{'section.add_button' | translate}}
+    </button>
+  </div>
+</app-page-header>
+
+<div class="responsive-table">
+  <table mat-table multiTemplateDataRows class="mat-table-flex"
+         [dataSource]="sectionsDataSource">
+
+    <ng-container matColumnDef="title">
+      <th fxFlex="50" mat-header-cell *matHeaderCellDef><h4>{{'section.feature' | translate}}</h4></th>
+      <td fxFlex="50" mat-cell *matCellDef="let row">
+        <h4>{{row.name}} - {{row.action_key}}</h4>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="display">
+      <th fxFlex="10" mat-header-cell *matHeaderCellDef><h4>{{'section.display' | translate}}</h4></th>
+      <td fxFlex="10" mat-cell *matCellDef="let row">
+        <mat-icon *ngIf="row.is_display">check</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th fxFlex="40" mat-header-cell *matHeaderCellDef><h4>{{'section.actions' | translate}}</h4></th>
+      <td fxFlex="40" mat-cell *matCellDef="let row">
+        <button mat-button (click)="onEditSectionClicked(row)">
+          {{'section.edit_button' | translate}}
+        </button>
+
+        <button mat-button (click)="onDeleteSectionClicked(row)">
+          {{'section.delete_button' | translate}}
+        </button>
+
+        <button mat-button (click)="onAddChildSectionClicked(row)">
+          {{'section.add_child_button' | translate}}
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedChildren">
+      <td mat-cell
+          fxFlex="100"
+          *matCellDef="let row"
+          [attr.colspan]="4">
+
+        <mat-card class="mat-elevation-z1 p-0">
+
+          <table mat-table class="mat-table-flex"
+                 [dataSource]="row.children">
+
+            <ng-container matColumnDef="title">
+              <th fxFlex="20" mat-header-cell *matHeaderCellDef>{{'section.feature' | translate}}</th>
+              <td fxFlex="20" mat-cell *matCellDef="let child">
+                {{child.name}} - {{child.action_key}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="display">
+              <th fxFlex="5" mat-header-cell *matHeaderCellDef>{{'section.display' | translate}}</th>
+              <td fxFlex="5" mat-cell *matCellDef="let child">
+                <mat-icon *ngIf="child.is_display">check</mat-icon>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="child_sections">
+              <th fxFlex="60" mat-header-cell *matHeaderCellDef>{{'section.relate_to_features' | translate}}</th>
+              <td fxFlex="60" mat-cell *matCellDef="let child" class="p-2">
+                <mat-chip-list class="m-0 p-0" *ngIf="child.child_sections && child.child_sections.length > 0"
+                               [selectable]="false">
+                  <mat-chip *ngFor="let sc of child.child_sections"
+                            [disableRipple]="true" [selectable]="false" [removable]="false">
+                    {{sc.title_with_parent}}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th fxFlex="15" mat-header-cell *matHeaderCellDef>{{'section.actions' | translate}}</th>
+              <td fxFlex="15" mat-cell *matCellDef="let child">
+                <button mat-button (click)="onEditSectionClicked(child)">
+                  {{'section.edit_button' | translate}}
+                </button>
+
+                <button mat-button (click)="onDeleteSectionClicked(child)">
+                  {{'section.delete_button' | translate}}
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row fxFlexFill *matHeaderRowDef="innerTableColumns"></tr>
+
+            <tr mat-row fxFlexFill
+                *matRowDef="let child; columns: innerTableColumns;"></tr>
+
+          </table>
+
+        </mat-card>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row fxFlexFill
+        *matHeaderRowDef="tableColumns"></tr>
+
+    <tr mat-row fxFlexFill class="mat-not-expended-row"
+        *matRowDef="let row; columns: tableColumns;"
+        [class.expanded]="true"></tr>
+
+    <tr mat-row fxFlexFill class="mat-expended-row"
+        *matRowDef="let row; columns: ['expandedChildren'];"></tr>
+
+  </table>
+</div>
+
+<mat-paginator #sectionsPaginator
+               [length]="sectionsTotalElements"
+               [pageSize]="sectionsPageSize"
+               [showFirstLastButtons]="true">
+</mat-paginator>

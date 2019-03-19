@@ -1,0 +1,21 @@
+@import '~@atlassian/aui/src/less/aui-page-typography';
+@import '~@atlassian/aui/src/less/aui-icons';
+@import '~@atlassian/aui/src/less/adgs-icons';
+@import '~@atlassian/aui/src/less/messages';
+
+#aui {
+  .load-custom-font(@family, @filename, @fontId: @family, @weight: normal, @style: normal) {
+    @font-face {
+      font-family: @family;
+      src: url('~@atlassian/adg-server-iconfont/dist/fonts/@{filename}.eot');
+      src: url('~@atlassian/adg-server-iconfont/dist/fonts/@{filename}.eot?#iefix') format('embedded-opentype'),
+      url('~@atlassian/adg-server-iconfont/dist/fonts/@{filename}.woff') format('woff'),
+      url('~@atlassian/adg-server-iconfont/dist/fonts/@{filename}.ttf') format('truetype'),
+      url('~@atlassian/adg-server-iconfont/dist/fonts/@{filename}.svg#@{fontId}') format('svg');
+      font-weight: @weight;
+      font-style: @style;
+    }
+  }
+}
+
+#aui.load-custom-font(@aui-icon-font-family, @aui-icon-font-file, @aui-icon-font-id);
